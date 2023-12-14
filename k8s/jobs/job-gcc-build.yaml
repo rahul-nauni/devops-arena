@@ -1,0 +1,28 @@
+# create a new kubernetes job
+# creates new container using gcc image
+# mounts host directory at /mnt/src path
+# executes: gcc -o build main.c in /mnt/src
+# executes: ./build
+
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: build
+spec:
+  template:
+    spec:
+      containers:
+      - name: build
+        image: gcc
+        command: ["sh", "-c", "gcc -o build main.cc && ./build"]
+        volumeMounts: 
+        - name: src
+          mountPath: /mnt/src
+      volumes:
+      - name: src
+        hostPath:
+          path: /home/ubuntu/src
+      restartPolicy: Never
+
+
+  
