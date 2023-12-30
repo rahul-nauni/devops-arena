@@ -1,0 +1,8 @@
+# Prometheus python client
+prometheus-client
+
+# MySQL client library
+pymysql
+
+# pydotenv
+python-dotenv

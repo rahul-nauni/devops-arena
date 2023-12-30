@@ -1,0 +1,7 @@
+# Ignore shell variables                                                       (base) 22:55:05
+.env
+# Ignore IDE stuff
+.idea/
+
+.DS_Store
+.vscode/
