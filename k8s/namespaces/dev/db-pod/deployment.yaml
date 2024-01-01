@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: db-pod-deployment
+  namespace: dev
+spec:
+  replicas: 4
+  selector:
+    matchLabels:
+      app: db-pod
+  template:
+    metadata:
+      labels:
+        app: db-pod
+    spec:
+      containers:
+        - name: postgres-container
+          image: postgres:latest
+          imagePullPolicy: IfNotPresent
+          env:
+            - name: DB_NAME
+              value: test
+            - name: DB_USER
+              value: prometheus
+            - name: DB_PASSWORD
+              value: test
+        - name: db-exporter-container
+          image: db-activity-exporter:local
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 9110
